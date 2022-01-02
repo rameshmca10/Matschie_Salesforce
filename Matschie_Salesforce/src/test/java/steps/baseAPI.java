@@ -6,7 +6,7 @@ import io.restassured.specification.RequestSpecification;
 
 public class baseAPI {
 	public static String id;
-	public Response response;
-	public ValidatableResponse json;
-	public RequestSpecification request;
+	public static Response response;
+	public static ValidatableResponse json;
+	public static RequestSpecification request;
 }

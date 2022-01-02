@@ -16,12 +16,12 @@ public class ContactManagement extends baseAPI {
 	}
 
 	@And("contact details are added in body {string}")
-	public void add_issue_details(String str) {
+	public void add_contact_details(String str) {
 
 		File file = new File(str);
 		response = given().auth().oauth2(
 				"00D5j000004mDIU!ARoAQL.kTMsTQ5aug7QwvVJP__hwWGHvqec8xRCnFEx116x78Ztc_XJ34pHAW0p1sSSDNkh1Ve_z8Gxwx9T_y_cGCsAgX6Wr")
-				.contentType(ContentType.JSON).body(file).log().all().when().post();
+				.contentType(ContentType.JSON).body(file).log().all().when().post("Contact");
 
 	}
 
@@ -38,9 +38,9 @@ public class ContactManagement extends baseAPI {
 
 	}
 
-	@Given("get id")
-	public void getId() {
-		System.out.println("\nUpdating ID: " + id);
+	@Given("get contact id to {string}")
+	public void getId(String str) {
+		System.out.println("\nContact ID " + str + ": " + id);
 	}
 
 	@When("contact details are updated in body {string}")
@@ -49,7 +49,7 @@ public class ContactManagement extends baseAPI {
 		File file = new File(str);
 		response = given().auth().oauth2(
 				"00D5j000004mDIU!ARoAQL.kTMsTQ5aug7QwvVJP__hwWGHvqec8xRCnFEx116x78Ztc_XJ34pHAW0p1sSSDNkh1Ve_z8Gxwx9T_y_cGCsAgX6Wr")
-				.contentType(ContentType.JSON).body(file).log().all().when().patch(id);
+				.contentType(ContentType.JSON).body(file).log().all().when().patch("Contact/" + id);
 
 	}
 
@@ -58,16 +58,14 @@ public class ContactManagement extends baseAPI {
 
 		response = given().auth().oauth2(
 				"00D5j000004mDIU!ARoAQL.kTMsTQ5aug7QwvVJP__hwWGHvqec8xRCnFEx116x78Ztc_XJ34pHAW0p1sSSDNkh1Ve_z8Gxwx9T_y_cGCsAgX6Wr")
-				.contentType(ContentType.JSON).log().all().when().delete(id);
-		System.out.println("\nDeleted ID: " + id);
+				.contentType(ContentType.JSON).log().all().when().delete("Contact/" + id);
 	}
 
 	@When("contact details are not loaded")
 	public void deleted_contact_details() {
-		System.out.println("\nGetting ID: " + id);
 		response = given().auth().oauth2(
 				"00D5j000004mDIU!ARoAQL.kTMsTQ5aug7QwvVJP__hwWGHvqec8xRCnFEx116x78Ztc_XJ34pHAW0p1sSSDNkh1Ve_z8Gxwx9T_y_cGCsAgX6Wr")
-				.contentType(ContentType.JSON).log().all().when().get(id);
+				.contentType(ContentType.JSON).log().all().when().get("Contact/" + id);
 		System.out.println(response.prettyPrint());
 	}
 
